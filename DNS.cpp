@@ -4,7 +4,7 @@
 #include <netdb.h>
 using namespace std;
 
-bool resolveIPToHostname(const char* ip) {
+bool IPtoH(const char* ip) {
     struct addrinfo hints, *result;
     memset(&hints, 0, sizeof(hints));
     hints.ai_family = AF_UNSPEC; 
@@ -28,7 +28,7 @@ bool resolveIPToHostname(const char* ip) {
     return true;
 }
 
-bool resolveHostnameToIP(const char* hostname) {
+bool HtoIP(const char* hostname) {
     struct addrinfo hints, *result;
     memset(&hints, 0, sizeof(hints));
     hints.ai_family = AF_UNSPEC; 
@@ -63,8 +63,8 @@ int main() {
     int choice;
 
     while (true) {
-        cout << "1. IP to Hostname Lookup\n";
-        cout << "2. Hostname to IP Lookup\n";
+        cout << "1. IP to Hostname \n";
+        cout << "2. Hostname to IP \n";
         cout << "3. Exit\n";
         cout << "Enter your choice: ";
         cin >> choice;
@@ -73,12 +73,12 @@ int main() {
             char ip[100];
             cout << "Enter IP address: ";
             cin >> ip;
-            resolveIPToHostname(ip);
+            IPtoH(ip);
         } else if (choice == 2) {
             char hostname[100];
             cout << "Enter hostname: ";
             cin >> hostname;
-            resolveHostnameToIP(hostname);
+            HtoIP(hostname);
         } else if (choice == 3) {
             cout << "Exiting program.\n";
             break;
@@ -90,3 +90,38 @@ int main() {
     return 0;
 }
 
+
+
+
+/*
+    
+output
+on terminal
+
+
+
+
+
+dsl@dsl-OptiPlex-3090:~$ g++ DNS.cpp
+dsl@dsl-OptiPlex-3090:~$ ./a.out
+1. IP to Hostname
+2. Hostname to IP
+3. Exit
+Enter your choice: 1
+Enter IP address: 8.8.8.8
+IP Address: 8.8.8.8 => Hostname: dns.google
+1. IP to Hostname
+2. Hostname to IP
+3. Exit
+Enter your choice: 2
+Enter hostname: www.cloudflare.com
+Hostname: www.cloudflare.com => IP Address: 104.16.124.96
+Hostname: www.cloudflare.com => IP Address: 104.16.123.96
+Hostname: www.cloudflare.com => IP Address: 2606:4700::6810:7c60
+Hostname: www.cloudflare.com => IP Address: 2606:4700::6810:7b60
+1. IP to Hostname
+2. Hostname to IP
+3. Exit
+Enter your choice:
+
+*/
